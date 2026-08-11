@@ -1,4 +1,6 @@
 # WES → ClinVar Variant Report Pipeline
+Or 
+#**exome-clinvar-annotator**
 
 A script-based pipeline for **whole exome sequencing (WES)** data: align paired-end
 Illumina reads, call germline variants, annotate against **ClinVar**, and generate
@@ -26,7 +28,9 @@ just point the scripts at your own files (see [Directory structure](#directory-s
 - [Usage](#usage)
 - [Commands & parameters explained](#commands--parameters-explained)
 - [Sample output report](#sample-output-report)
+- [Test data used for validation](#test-data-used-for-validation)
 - [Troubleshooting](#troubleshooting)
+- [Roadmap](#roadmap)
 - [Disclaimer](#disclaimer)
 
 ---
@@ -66,7 +70,7 @@ just point the scripts at your own files (see [Directory structure](#directory-s
 
 | Input | Supported formats | Notes |
 |---|---|---|
-| Sequencing platform | Illumina paired-end WES (HiSeq/NovaSeq/NextSeq) | Not designed for long-read (PacBio/ONT) or single-end data |
+| Sequencing platform | Illumina paired-end WES (HiSeq/NovaSeq/NextSeq) | Long-read (PacBio/ONT) and single-end support not yet available — see [Roadmap](#roadmap) |
 | Reads | `.fastq`, `.fastq.gz` | Must be a matched R1/R2 pair from the same sample/library |
 | Reference genome | `.fa` / `.fasta`, uncompressed | GRCh38 (recommended) or GRCh37/hg19 — must match the ClinVar build you download |
 | Capture kit target regions (optional) | `.bed` | e.g. Agilent SureSelect, IDT xGen Exome, Twist Exome — restricts calling/reporting to on-target exons |
@@ -276,6 +280,25 @@ The `.html` version renders the same content as color-coded cards
 in ClinVar), and the `.tsv` gives every variant as one flat row for
 filtering in Excel or pandas.
 
+## Test data used for validation
+
+For initial sample testing and pipeline validation, publicly available SRA
+data [SRR10054890](https://www.ncbi.nlm.nih.gov/sra/?term=SRR10054890)
+(https://www.ncbi.nlm.nih.gov/sra/?term=SRR10054890) was used as a reference
+input to confirm the pipeline runs end-to-end (alignment → variant calling →
+ClinVar annotation → report generation).
+
+This dataset is used purely for independent testing/validation of the
+pipeline's functionality — no permission or endorsement from the original
+submitter/author of SRR10054890 is implied or required, as this is publicly
+archived data on NCBI's Sequence Read Archive intended for open reuse.
+
+If you'd like to validate the pipeline on your own end, feel free to swap in
+your own positive-control and negative-control samples (or any public SRA
+accession) rather than relying on this one dataset — that will give you more
+confidence in the pipeline's behavior on data representative of your own
+use case.
+
 ## Troubleshooting
 
 **0 variants annotated, but variants were called**
@@ -303,6 +326,14 @@ zcat results/<SAMPLE>/vcf/<SAMPLE>.filtered.vcf.gz | grep -v "^#" | cut -f7 | so
 Shows which hard filter (`lowQD`/`highFS`/`lowMQ`/`lowDP`) is removing the
 most variants, so you know which threshold to relax for your data's actual
 coverage/quality profile.
+
+## Roadmap
+
+Currently this pipeline supports **Illumina short-read paired-end WES data
+only**. Support for long-read platforms — **PacBio (HiFi)** and **Oxford
+Nanopore** — is planned for a future update, which will extend the alignment
+and variant-calling steps to handle long-read-specific aligners and callers.
+Stay tuned for updates on long-read support.
 
 ## Disclaimer
 
