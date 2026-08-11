@@ -1,0 +1,62 @@
+# ==========================================================
+# Sequencing data & large pipeline outputs — never commit these
+# ==========================================================
+
+# Raw reads
+raw_reads/
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+
+# Reference genome + indices
+reference/
+*.fa
+*.fasta
+*.fa.fai
+*.fa.bwt
+*.fa.pac
+*.fa.ann
+*.fa.amb
+*.fa.sa
+*.fa.*.bt2
+*.dict
+
+# ClinVar database files
+clinvar/
+*.vcf.gz
+*.vcf.gz.tbi
+*.vcf
+
+# Exome capture kit BED files (can be proprietary to the vendor)
+capture_kit/
+*.bed
+
+# Alignment files
+*.bam
+*.bam.bai
+*.sam
+*.cram
+
+# Pipeline results/output
+results/
+*.dup_metrics.txt
+
+# fastp / QC reports (regenerable, can be large)
+*_fastp.html
+*_fastp.json
+
+# ==========================================================
+# System / editor junk
+# ==========================================================
+.DS_Store
+Thumbs.db
+*.swp
+*.log
+__pycache__/
+*.pyc
+
+# ==========================================================
+# Conda environment files (if exported locally)
+# ==========================================================
+*.tar.gz

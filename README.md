@@ -1,7 +1,4 @@
-# exome-clinvar-annotator
-Or
 # WES → ClinVar Variant Report Pipeline
-A WES pipeline: aligns Illumina paired-end reads, calls germline variants, and annotates them against ClinVar to generate a clinical report — variants classified as Pathogenic, VUS, Benign, or Not in ClinVar, each with a plain-language explanation. Research/educational use only, not for clinical diagnosis.
 
 A script-based pipeline for **whole exome sequencing (WES)** data: align paired-end
 Illumina reads, call germline variants, annotate against **ClinVar**, and generate
@@ -119,8 +116,8 @@ nothing in the scripts is hardcoded to a specific sample or chromosome anymore.
 | [BCFtools](http://www.htslib.org/) | VCF normalization, filtering | 1.19 | htslib.org |
 | [SnpSift](https://pcingola.github.io/SnpEff/) (SnpEff suite) | ClinVar annotation | 5.2 | pcingola.github.io/SnpEff |
 | [BEDtools](https://bedtools.readthedocs.io/) | Target-region handling | 2.31.1 | bedtools.readthedocs.io |
-| [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/) | Pathogenicity/clinical significance database recommend to download clinvar.vcf.gz file | rolling (NCBI weekly release) | ncbi.nlm.nih.gov/clinvar · [VCF FTP](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/) |
-| Reference genome | GRCh38 (or GRCh37) assembly | build-dependent | [NCBI](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/) · [UCSC ](https://hgdownload.soe.ucsc.edu/downloads.html) · [Ensembl](https://www.ensembl.org/info/data/ftp/index.html) |
+| [ClinVar](https://www.ncbi.nlm.nih.gov/clinvar/) | Pathogenicity/clinical significance database | rolling (NCBI weekly release) | ncbi.nlm.nih.gov/clinvar · [VCF FTP](https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/) |
+| Reference genome | GRCh38 (or GRCh37) assembly | build-dependent | [NCBI](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.40/) · [UCSC](https://hgdownload.soe.ucsc.edu/downloads.html) · [Ensembl](https://www.ensembl.org/info/data/ftp/index.html) |
 
 ClinVar updates weekly — re-run `00b_get_clinvar.sh` periodically if you want
 current classifications; a variant's `CLNSIG` label (e.g. VUS → Likely
